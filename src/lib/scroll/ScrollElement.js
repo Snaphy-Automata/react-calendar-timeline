@@ -35,7 +35,6 @@ class ScrollElement extends Component {
   handleScroll = () => {
     const { width } = this.props
     const scrollComponent = this.scrollComponent
-
     const scrollX = scrollComponent.scrollLeft
 
     // move the virtual canvas if needed

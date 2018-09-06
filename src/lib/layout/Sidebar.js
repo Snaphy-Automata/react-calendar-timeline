@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 
 import { _get, arraysEqual } from '../utility/generic'
 
+import { List} from 'react-virtualized';
+
 export default class Sidebar extends Component {
   static propTypes = {
     groups: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
@@ -11,7 +13,26 @@ export default class Sidebar extends Component {
     groupHeights: PropTypes.array.isRequired,
     keys: PropTypes.object.isRequired,
     groupRenderer: PropTypes.func,
-    isRightSidebar: PropTypes.bool
+    isRightSidebar: PropTypes.bool,
+    //Update 6th sept 2018
+    //Added by Robins.
+    screenHeight: PropTypes.number.isRequired,
+  }
+
+
+  constructor(props){
+    super(props)
+    const { groupHeights } = props
+    const rowHeight   = this.rowHeight;
+    const rowRenderer = this.rowRenderer;
+    const renderGroupContent = this.renderGroupContent;
+    this.getRowHeight = (options)=>{
+      return rowHeight(options, groupHeights);
+    }
+
+    this.getRow = (options)=>{
+      return rowRenderer(options, props, renderGroupContent)
+    }
   }
 
   shouldComponentUpdate(nextProps) {
@@ -24,9 +45,9 @@ export default class Sidebar extends Component {
     )
   }
 
-  renderGroupContent(group, isRightSidebar, groupTitleKey, groupRightTitleKey) {
-    if (this.props.groupRenderer) {
-      return React.createElement(this.props.groupRenderer, {
+  renderGroupContent(group, isRightSidebar, groupTitleKey, groupRightTitleKey, props) {
+    if (props.groupRenderer) {
+      return React.createElement(props.groupRenderer, {
         group,
         isRightSidebar
       })
@@ -35,56 +56,76 @@ export default class Sidebar extends Component {
     }
   }
 
-  render() {
-    const { width, groupHeights, height, isRightSidebar } = this.props
+  /**
+   * Will calculate row heights..
+   */
+  rowHeight({index}, groupHeights){
+    return groupHeights[index] - 1;
+  }
 
-    const { groupIdKey, groupTitleKey, groupRightTitleKey } = this.props.keys
+  rowRenderer({
+    key,         // Unique key within array of rows
+    index,       // Index of row within collection
+    isScrolling, // The List is currently being scrolled
+    isVisible,   // This row is visible within the List (eg it is not an overscanned row)
+    style        // Style object to be applied to row (to position it)
+  }, props, renderGroupContent) {
+    const { isRightSidebar, groupHeights } = props
+    const { groupIdKey, groupTitleKey, groupRightTitleKey } = props.keys
+    const group = props.groups[index]
+    const elementStyle = {
+      height: `${groupHeights[index] - 1}px`,
+      lineHeight: `${groupHeights[index] - 1}px`,
+      ...style,
+    }
+
+    return (
+      <div
+          key={key}
+          className={
+            'rct-sidebar-row' +
+            (index % 2 === 0 ? ' rct-sidebar-row-even' : ' rct-sidebar-row-odd')
+          }
+          style={elementStyle}
+        >
+          {renderGroupContent(
+            group,
+            isRightSidebar,
+            groupTitleKey,
+            groupRightTitleKey,
+            props,
+          )}
+        </div>
+    )
+  }
+
+  render() {
+    const { width, isRightSidebar, screenHeight } = this.props
 
     const sidebarStyle = {
       width: `${width}px`,
-      height: `${height}px`
+      height: `${screenHeight}px`
     }
 
     const groupsStyle = {
       width: `${width}px`
     }
 
-    let groupLines = []
-    let i = 0
-
-    this.props.groups.forEach((group, index) => {
-      const elementStyle = {
-        height: `${groupHeights[index] - 1}px`,
-        lineHeight: `${groupHeights[index] - 1}px`
-      }
-
-      groupLines.push(
-        <div
-          key={_get(group, groupIdKey)}
-          className={
-            'rct-sidebar-row' +
-            (i % 2 === 0 ? ' rct-sidebar-row-even' : ' rct-sidebar-row-odd')
-          }
-          style={elementStyle}
-        >
-          {this.renderGroupContent(
-            group,
-            isRightSidebar,
-            groupTitleKey,
-            groupRightTitleKey
-          )}
-        </div>
-      )
-      i += 1
-    })
-
     return (
       <div
         className={'rct-sidebar' + (isRightSidebar ? ' rct-sidebar-right' : '')}
         style={sidebarStyle}
       >
-        <div style={groupsStyle}>{groupLines}</div>
+        <div style={groupsStyle}>
+          <List
+            width={width}
+            height={screenHeight}
+            rowCount={this.props.groups.length}
+            rowHeight={this.getRowHeight}
+            rowRenderer={this.getRow}
+          />
       </div>
+    </div>
     )
   }
 }

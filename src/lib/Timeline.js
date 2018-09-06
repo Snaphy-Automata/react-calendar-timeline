@@ -35,6 +35,10 @@ import { TimelineMarkersProvider } from './markers/TimelineMarkersContext'
 
 export default class ReactCalendarTimeline extends Component {
   static propTypes = {
+    //Update 6th Sept 2018
+    //By Robins Gupta
+    //Specifying the screen height is necessary..
+    screenHeight: PropTypes.number.isRequired,
     groups: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
     items: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
     sidebarWidth: PropTypes.number,
@@ -900,7 +904,7 @@ export default class ReactCalendarTimeline extends Component {
     this.headerScrollListener = listener
   }
 
-  sidebar(height, groupHeights) {
+  sidebar(height, groupHeights, screenHeight) {
     const { sidebarWidth } = this.props
     return (
       sidebarWidth != null &&
@@ -912,6 +916,7 @@ export default class ReactCalendarTimeline extends Component {
           width={this.props.sidebarWidth}
           groupHeights={groupHeights}
           height={height}
+          screenHeight={screenHeight}
         />
       )
     )
@@ -1159,7 +1164,7 @@ export default class ReactCalendarTimeline extends Component {
     }
 
     const outerComponentStyle = {
-      height: `${height}px`
+      height: `${this.props.screenHeight}px`
     }
 
     return (
@@ -1187,7 +1192,7 @@ export default class ReactCalendarTimeline extends Component {
               headerLabelHeight
             )}
             <div style={outerComponentStyle} className="rct-outer">
-              {sidebarWidth > 0 ? this.sidebar(height, groupHeights) : null}
+              {sidebarWidth > 0 ? this.sidebar(height, groupHeights, this.props.screenHeight) : null}
               <ScrollElement
                 scrollRef={el => (this.scrollComponent = el)}
                 width={width}
@@ -1203,7 +1208,30 @@ export default class ReactCalendarTimeline extends Component {
                 onContextMenu={this.handleScrollContextMenu}
               >
                 <MarkerCanvas>
+                  <div>
                   {this.items(
+                    canvasTimeStart,
+                    zoom,
+                    canvasTimeEnd,
+                    canvasWidth,
+                    minUnit,
+                    dimensionItems,
+                    groupHeights,
+                    groupTops
+                  )}
+                  {/* {this.verticalLines(
+                    canvasTimeStart,
+                    canvasTimeEnd,
+                    canvasWidth,
+                    minUnit,
+                    timeSteps,
+                    height,
+                    headerHeight
+                  )} */}
+                  {this.horizontalLines(canvasWidth, groupHeights)}
+                  {/* {this.infoLabel()} */}
+                  </div>
+                  {/* {this.items(
                     canvasTimeStart,
                     zoom,
                     canvasTimeEnd,
@@ -1223,8 +1251,8 @@ export default class ReactCalendarTimeline extends Component {
                     headerHeight
                   )}
                   {this.horizontalLines(canvasWidth, groupHeights)}
-                  {this.infoLabel()}
-                  {this.childrenWithProps(
+                  {this.infoLabel()} */}
+                  {/* {this.childrenWithProps(
                     canvasTimeStart,
                     canvasTimeEnd,
                     canvasWidth,
@@ -1237,7 +1265,7 @@ export default class ReactCalendarTimeline extends Component {
                     visibleTimeEnd,
                     minUnit,
                     timeSteps
-                  )}
+                  )} */}
                 </MarkerCanvas>
               </ScrollElement>
               {rightSidebarWidth > 0
