@@ -16,6 +16,7 @@ export default class Sidebar extends Component {
     isRightSidebar: PropTypes.bool,
     //Update 6th sept 2018
     //Added by Robins.
+    setListReference: PropTypes.func,
     screenHeight: PropTypes.number.isRequired,
   }
 
@@ -70,7 +71,7 @@ export default class Sidebar extends Component {
     isVisible,   // This row is visible within the List (eg it is not an overscanned row)
     style        // Style object to be applied to row (to position it)
   }, props, renderGroupContent) {
-    const { isRightSidebar, groupHeights } = props
+    const { isRightSidebar, groupHeights, setListReference } = props
     const { groupIdKey, groupTitleKey, groupRightTitleKey } = props.keys
     const group = props.groups[index]
     const elementStyle = {
@@ -100,7 +101,7 @@ export default class Sidebar extends Component {
   }
 
   render() {
-    const { width, isRightSidebar, screenHeight } = this.props
+    const { width, isRightSidebar, screenHeight, setListReference } = this.props
 
     const sidebarStyle = {
       width: `${width}px`,
@@ -118,6 +119,9 @@ export default class Sidebar extends Component {
       >
         <div style={groupsStyle}>
           <List
+            ref={(instance) => {
+              setListReference(instance);
+            }}
             width={width}
             height={screenHeight}
             rowCount={this.props.groups.length}

@@ -38,7 +38,9 @@ export default class ReactCalendarTimeline extends Component {
     //Update 6th Sept 2018
     //By Robins Gupta
     //Specifying the screen height is necessary..
+    setListReference: PropTypes.func,
     screenHeight: PropTypes.number.isRequired,
+
     groups: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
     items: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
     sidebarWidth: PropTypes.number,
@@ -917,6 +919,7 @@ export default class ReactCalendarTimeline extends Component {
           groupHeights={groupHeights}
           height={height}
           screenHeight={screenHeight}
+          setListReference={this.props.setListReference}
         />
       )
     )
@@ -1128,7 +1131,8 @@ export default class ReactCalendarTimeline extends Component {
       sidebarWidth,
       rightSidebarWidth,
       timeSteps,
-      traditionalZoom
+      traditionalZoom,
+      setListReference,
     } = this.props
     const {
       draggingItem,
