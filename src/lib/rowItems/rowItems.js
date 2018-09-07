@@ -64,7 +64,7 @@ export default class RowItems extends Component {
     dimensionItems: PropTypes.array,
     topOffset: PropTypes.number,
     groupTops: PropTypes.array,
-    useResizeHandle: PropTypes.bool
+    useResizeHandle: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -257,10 +257,10 @@ export default class RowItems extends Component {
         rowCount={this.props.items.length}
         rowHeight={this.rowHeight.bind(this)}
         rowRenderer={this.cellRenderer.bind(this)}
-        // style={{
-        //   height: "100%",
-        //   overflow: "hidden"
-        // }}
+        style={{
+          height: "100%",
+          overflow: "hidden"
+        }}
       />
     )
   }
