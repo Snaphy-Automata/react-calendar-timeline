@@ -39,6 +39,7 @@ export default class ReactCalendarTimeline extends Component {
     //By Robins Gupta
     //Specifying the screen height is necessary..
     setListReference: PropTypes.func,
+    setRowListRef: PropTypes.func,
     screenHeight: PropTypes.number.isRequired,
 
     groups: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
@@ -788,10 +789,11 @@ export default class ReactCalendarTimeline extends Component {
     groupHeights,
     groupTops,
     screenHeight,
-    scrollTop,
   ){
     return (
       <RowItems
+        //Update added on 7th Sept 2018
+        setRowListRef={this.props.setRowListRef}
         //Row Props
         clickTolerance={this.props.clickTolerance}
         onRowClick={this.handleRowClick}
@@ -1259,7 +1261,7 @@ export default class ReactCalendarTimeline extends Component {
                 <ScrollElement
                   scrollRef={el => (this.scrollComponent = el)}
                   width={width}
-                  height={height}
+                  height={this.props.screenHeight}
                   onZoom={this.changeZoom}
                   onWheelZoom={this.handleWheelZoom}
                   traditionalZoom={traditionalZoom}

@@ -21,6 +21,8 @@ const canResizeRight = (item, canResize) => {
 
 export default class RowItems extends Component {
   static propTypes = {
+    //Ref 7th Sept 2018
+    setRowListRef: PropTypes.func,
     //Row
     lineCount: PropTypes.number.isRequired,
     onRowClick: PropTypes.func.isRequired,
@@ -247,10 +249,14 @@ export default class RowItems extends Component {
   render() {
     const {
       screenHeight,
+      setRowListRef,
     } = this.props
 
     return (
       <List
+        ref={(instance) => {
+          setRowListRef(instance);
+        }}
         className="rct-items rct-horizontal-lines"
         width={this.props.canvasWidth}
         height={screenHeight}
