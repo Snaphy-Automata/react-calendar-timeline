@@ -1132,7 +1132,6 @@ export default class ReactCalendarTimeline extends Component {
       rightSidebarWidth,
       timeSteps,
       traditionalZoom,
-      setListReference,
     } = this.props
     const {
       draggingItem,
@@ -1168,7 +1167,7 @@ export default class ReactCalendarTimeline extends Component {
     }
 
     const outerComponentStyle = {
-      height: `${this.props.screenHeight}px`
+      //height: `${this.props.screenHeight}px`
     }
 
     return (

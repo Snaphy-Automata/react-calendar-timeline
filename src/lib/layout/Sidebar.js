@@ -105,7 +105,7 @@ export default class Sidebar extends Component {
 
     const sidebarStyle = {
       width: `${width}px`,
-      height: `${screenHeight}px`
+      //height: `${screenHeight}px`
     }
 
     const groupsStyle = {
