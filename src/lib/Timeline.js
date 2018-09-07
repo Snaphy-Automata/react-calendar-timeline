@@ -15,11 +15,6 @@ import windowResizeDetector from '../resize-detector/window'
 import {
   getMinUnit,
   getNextUnit,
-  // stack,
-  // nostack,
-  // calculateDimensions,
-  // getGroupOrders,
-  // getVisibleItems,
   calculateTimeForXPosition
 } from './utility/calendar'
 import { _get, _length } from './utility/generic'
@@ -307,25 +302,6 @@ export default class ReactCalendarTimeline extends Component {
       resizingItem: null,
       resizingEdge: null
     }
-
-    //Removed 7th Sept 2018
-    //By Robins Gupta
-    // const { dimensionItems, height, groupHeights, groupTops } = this.stackItems(
-    //   props.items,
-    //   props.groups,
-    //   this.state.canvasTimeStart,
-    //   this.state.visibleTimeStart,
-    //   this.state.visibleTimeEnd,
-    //   this.state.width
-    // )
-
-    // /* eslint-disable react/no-direct-mutation-state */
-    // this.state.dimensionItems = dimensionItems
-    // this.state.height = height
-    // this.state.groupHeights = groupHeights
-    // this.state.groupTops = groupTops
-
-    /* eslint-enable */
   }
 
   componentDidMount() {
@@ -417,9 +393,9 @@ export default class ReactCalendarTimeline extends Component {
       )
     }
 
-    this.setState({
-      currentScrollLeft: scrollX
-    })
+    // this.setState({
+    //   currentScrollLeft: scrollX
+    // })
   }
 
   componentWillReceiveProps(nextProps) {
