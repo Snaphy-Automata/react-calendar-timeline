@@ -8,26 +8,26 @@ export default class Sidebar extends Component {
   static propTypes = {
     groups: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
     width: PropTypes.number.isRequired,
-    height: PropTypes.number.isRequired,
-    groupHeights: PropTypes.array.isRequired,
+    //height: PropTypes.number.isRequired,
+    //groupHeights: PropTypes.array.isRequired,
     keys: PropTypes.object.isRequired,
     groupRenderer: PropTypes.func,
     isRightSidebar: PropTypes.bool,
     //Update 6th sept 2018
     //Added by Robins.
     setListReference: PropTypes.func,
+    stackItem: PropTypes.func.isRequired,
     screenHeight: PropTypes.number.isRequired,
   }
 
 
   constructor(props){
     super(props)
-    const { groupHeights } = props
-    const rowHeight   = this.rowHeight;
+    const rowHeight   = this.rowHeight.bind(this);
     const rowRenderer = this.rowRenderer;
     const renderGroupContent = this.renderGroupContent;
     this.getRowHeight = (options)=>{
-      return rowHeight(options, groupHeights);
+      return rowHeight(options, props);
     }
 
     this.getRow = (options)=>{
@@ -39,11 +39,13 @@ export default class Sidebar extends Component {
     return !(
       arraysEqual(nextProps.groups, this.props.groups) &&
       nextProps.keys === this.props.keys &&
-      nextProps.width === this.props.width &&
-      nextProps.groupHeights === this.props.groupHeights &&
-      nextProps.height === this.props.height
+      nextProps.width === this.props.width
+      //Removed by Robins 7th Sept 2018
+      //nextProps.groupHeights === this.props.groupHeights
+      //nextProps.height === this.props.height
     )
   }
+
 
   renderGroupContent(group, isRightSidebar, groupTitleKey, groupRightTitleKey, props) {
     if (props.groupRenderer) {
@@ -56,11 +58,19 @@ export default class Sidebar extends Component {
     }
   }
 
+
+  getGroupHeight(index, props){
+    const {stackItem} = props
+    const {groupHeight}    = stackItem(index)
+    return groupHeight;
+  }
+
+
   /**
    * Will calculate row heights..
    */
-  rowHeight({index}, groupHeights){
-    return groupHeights[index];
+  rowHeight({index}, props){
+    return this.getGroupHeight(index, props)
   }
 
   rowRenderer({
@@ -70,13 +80,15 @@ export default class Sidebar extends Component {
     isVisible,   // This row is visible within the List (eg it is not an overscanned row)
     style        // Style object to be applied to row (to position it)
   }, props, renderGroupContent) {
-    const { isRightSidebar, groupHeights, setListReference } = props
+    const { isRightSidebar } = props
+
     const { groupIdKey, groupTitleKey, groupRightTitleKey } = props.keys
     const group = props.groups[index]
+    const groupHeight = this.getGroupHeight(index, props)
     const elementStyle = {
       ...style,
-      height: `${groupHeights[index] - 1}px`,
-      lineHeight: `${groupHeights[index] - 1}px`,
+      height: `${groupHeight - 1}px`,
+      lineHeight: `${groupHeight - 1}px`,
       width: "93%"
     }
 

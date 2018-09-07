@@ -23,6 +23,7 @@ export default class RowItems extends Component {
   static propTypes = {
     //Ref 7th Sept 2018
     setRowListRef: PropTypes.func,
+    stackItem: PropTypes.func.isRequired,
     //Row
     lineCount: PropTypes.number.isRequired,
     onRowClick: PropTypes.func.isRequired,
@@ -63,9 +64,9 @@ export default class RowItems extends Component {
     itemRenderer: PropTypes.func,
     selected: PropTypes.array,
 
-    dimensionItems: PropTypes.array,
+    //dimensionItems: PropTypes.array,
     topOffset: PropTypes.number,
-    groupTops: PropTypes.array,
+    //groupTops: PropTypes.array,
     useResizeHandle: PropTypes.bool,
   }
 
@@ -138,10 +139,11 @@ export default class RowItems extends Component {
   cellRenderer ({ index, key, style }) {
     //First check if the item is visible or not...
     const {
-      groupHeights,
+      stackItem,
+      //groupHeights,
       canvasTimeStart,
       canvasTimeEnd,
-      dimensionItems,
+      //dimensionItems,
       items,
       minimumWidthForItemContentVisibility,
       //Horizontal Lines Props
@@ -149,14 +151,15 @@ export default class RowItems extends Component {
       onRowClick,
       onRowDoubleClick,
     } = this.props
+    const {dimension, groupHeight} = stackItem(index)
     const { itemTimeStartKey, itemTimeEndKey } = this.props.keys
     const item = items[index]
     const isVisible = _get(item, itemTimeStartKey) <= canvasTimeEnd && _get(item, itemTimeEndKey) >= canvasTimeStart
     const { itemIdKey, itemGroupKey } = this.props.keys
+index
+    //const groupOrders = this.getGroupOrders()
 
-    const groupOrders = this.getGroupOrders()
-
-    const sortedDimensionItems = keyBy(dimensionItems, 'id')
+    //const sortedDimensionItems = keyBy(dimensionItems, 'id')
 
     return (
       <div
@@ -174,7 +177,7 @@ export default class RowItems extends Component {
         isEvenRow={index % 2 === 0}
         style={{
           width: `${this.props.canvasWidth}px`,
-          height: `${groupHeights[index] - 1}px`,
+          height: `${groupHeight - 1}px`,
         }}
       />
       {isVisible &&
@@ -183,10 +186,8 @@ export default class RowItems extends Component {
           key={_get(item, itemIdKey)}
           item={item}
           keys={this.props.keys}
-          order={groupOrders[_get(item, itemGroupKey)]}
-          dimensions={
-            sortedDimensionItems[_get(item, itemIdKey)].dimensions
-          }
+          order={index}
+          dimensions={dimension}
           selected={this.isSelected(item, itemIdKey)}
           canChangeGroup={
             _get(item, 'canChangeGroup') !== undefined
@@ -237,15 +238,16 @@ export default class RowItems extends Component {
    */
   rowHeight({index}){
     const {
-      dimensionItems,
-      items,
+      stackItem,
+      //items,
     } = this.props
-    const item = items[index]
-    const { itemIdKey } = this.props.keys
+    //const item = items[index]
+    const {dimension} = stackItem(index)
+    //const { itemIdKey } = this.props.keys
 
-    const sortedDimensionItems = keyBy(dimensionItems, 'id')
-    const dimensions = sortedDimensionItems[_get(item, itemIdKey)].dimensions
-    return dimensions.height;
+    // const sortedDimensionItems = keyBy(dimensionItems, 'id')
+    // const dimensions = sortedDimensionItems[_get(item, itemIdKey)].dimensions
+    return dimension.height;
   }
 
 
