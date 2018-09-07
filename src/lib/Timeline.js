@@ -449,6 +449,7 @@ export default class ReactCalendarTimeline extends Component {
     }
   }
 
+
   updateDimensions(items, groups) {
     const {
       canvasTimeStart,
@@ -456,7 +457,6 @@ export default class ReactCalendarTimeline extends Component {
       visibleTimeEnd,
       width
     } = this.state
-    console.log("Updating dimensions");
     // const { dimensionItems, height, groupHeights, groupTops } = this.stackItems(
     //   items,
     //   groups,
@@ -481,8 +481,8 @@ export default class ReactCalendarTimeline extends Component {
     const oldCanvasTimeStart = this.state.canvasTimeStart
     const oldZoom = this.state.visibleTimeEnd - this.state.visibleTimeStart
     const newZoom = visibleTimeEnd - visibleTimeStart
-    const items = updatedItems || this.props.items
-    const groups = updatedGroups || this.props.groups
+    // const items = updatedItems || this.props.items
+    // const groups = updatedGroups || this.props.groups
 
     let newState = {
       visibleTimeStart: visibleTimeStart,
