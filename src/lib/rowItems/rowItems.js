@@ -77,7 +77,7 @@ export default class RowItems extends Component {
   shouldComponentUpdate(nextProps) {
     return !(
       nextProps.lineCount === this.props.lineCount &&
-      nextProps.groupHeights === this.props.groupHeights &&
+      //nextProps.groupHeights === this.props.groupHeights &&
       arraysEqual(nextProps.groups, this.props.groups) &&
       arraysEqual(nextProps.items, this.props.items) &&
       nextProps.keys === this.props.keys &&
@@ -92,7 +92,7 @@ export default class RowItems extends Component {
       nextProps.canMove === this.props.canMove &&
       nextProps.canResize === this.props.canResize &&
       nextProps.canSelect === this.props.canSelect &&
-      nextProps.dimensionItems === this.props.dimensionItems &&
+      //nextProps.dimensionItems === this.props.dimensionItems &&
       nextProps.topOffset === this.props.topOffset &&
       nextProps.minimumWidthForItemContentVisibility ===
         this.props.minimumWidthForItemContentVisibility
@@ -151,7 +151,7 @@ export default class RowItems extends Component {
       onRowClick,
       onRowDoubleClick,
     } = this.props
-    const {dimension, groupHeight} = stackItem(index)
+    const {dimension, groupHeight, groupTop} = stackItem(index)
     const { itemTimeStartKey, itemTimeEndKey } = this.props.keys
     const item = items[index]
     const isVisible = _get(item, itemTimeStartKey) <= canvasTimeEnd && _get(item, itemTimeEndKey) >= canvasTimeStart
@@ -182,6 +182,7 @@ index
       />
       {isVisible &&
         <Item
+          index={index}
           style={{}}
           key={_get(item, itemIdKey)}
           item={item}
@@ -208,7 +209,7 @@ index
           }
           useResizeHandle={this.props.useResizeHandle}
           topOffset={this.props.topOffset}
-          groupTops={this.props.groupTops}
+          groupTop={groupTop}
           canvasTimeStart={this.props.canvasTimeStart}
           canvasTimeEnd={this.props.canvasTimeEnd}
           canvasWidth={this.props.canvasWidth}

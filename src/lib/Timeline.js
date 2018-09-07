@@ -358,14 +358,14 @@ export default class ReactCalendarTimeline extends Component {
     const { headerLabelGroupHeight, headerLabelHeight } = props
     const headerHeight = headerLabelGroupHeight + headerLabelHeight
 
-    const { dimensionItems, height, groupHeights, groupTops } = this.stackItems(
-      props.items,
-      props.groups,
-      this.state.canvasTimeStart,
-      this.state.visibleTimeStart,
-      this.state.visibleTimeEnd,
-      width
-    )
+    // const { dimensionItems, height, groupHeights, groupTops } = this.stackItems(
+    //   props.items,
+    //   props.groups,
+    //   this.state.canvasTimeStart,
+    //   this.state.visibleTimeStart,
+    //   this.state.visibleTimeEnd,
+    //   width
+    // )
 
     // this is needed by dragItem since it uses pageY from the drag events
     // if this was in the context of the scrollElement, this would not be necessary
@@ -374,10 +374,10 @@ export default class ReactCalendarTimeline extends Component {
     this.setState({
       width,
       topOffset,
-      dimensionItems,
-      height,
-      groupHeights,
-      groupTops
+      // dimensionItems,
+      // height,
+      // groupHeights,
+      // groupTops
     })
     this.scrollComponent.scrollLeft = width
   }
@@ -456,16 +456,16 @@ export default class ReactCalendarTimeline extends Component {
       visibleTimeEnd,
       width
     } = this.state
-    const { dimensionItems, height, groupHeights, groupTops } = this.stackItems(
-      items,
-      groups,
-      canvasTimeStart,
-      visibleTimeStart,
-      visibleTimeEnd,
-      width
-    )
+    // const { dimensionItems, height, groupHeights, groupTops } = this.stackItems(
+    //   items,
+    //   groups,
+    //   canvasTimeStart,
+    //   visibleTimeStart,
+    //   visibleTimeEnd,
+    //   width
+    // )
 
-    this.setState({ dimensionItems, height, groupHeights, groupTops })
+    //this.setState({ dimensionItems, height, groupHeights, groupTops })
   }
 
   // called when the visible time changes
@@ -525,23 +525,23 @@ export default class ReactCalendarTimeline extends Component {
       const canvasTimeStart = newState.canvasTimeStart
         ? newState.canvasTimeStart
         : oldCanvasTimeStart
-      const {
-        dimensionItems,
-        height,
-        groupHeights,
-        groupTops
-      } = this.stackItems(
-        items,
-        groups,
-        canvasTimeStart,
-        visibleTimeStart,
-        visibleTimeEnd,
-        this.state.width
-      )
-      newState.dimensionItems = dimensionItems
-      newState.height = height
-      newState.groupHeights = groupHeights
-      newState.groupTops = groupTops
+      // const {
+      //   dimensionItems,
+      //   height,
+      //   groupHeights,
+      //   groupTops
+      // } = this.stackItems(
+      //   items,
+      //   groups,
+      //   canvasTimeStart,
+      //   visibleTimeStart,
+      //   visibleTimeEnd,
+      //   this.state.width
+      // )
+      // newState.dimensionItems = dimensionItems
+      // newState.height = height
+      // newState.groupHeights = groupHeights
+      // newState.groupTops = groupTops
     }
 
     this.setState(newState, () => {
@@ -679,8 +679,8 @@ export default class ReactCalendarTimeline extends Component {
   stackItem = (index)=>{
     const {width} = this.state
     return stackItem(
-      this.props.items,
-      this.props.groups,
+      this.props.items[index],
+      this.props.groups[index],
       index,
       this.state.canvasTimeStart,
       this.state.visibleTimeStart,
@@ -1317,9 +1317,9 @@ export default class ReactCalendarTimeline extends Component {
                         canvasTimeEnd,
                         canvasWidth,
                         minUnit,
-                        dimensionItems,
-                        groupHeights,
-                        groupTops,
+                        // dimensionItems,
+                        // groupHeights,
+                        // groupTops,
                         this.props.screenHeight,
                       )
                     }

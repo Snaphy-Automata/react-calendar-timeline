@@ -10,6 +10,7 @@ export default class Item extends Component {
   // they are coming from a trusted component anyway
   // (this complicates performance debugging otherwise)
   static propTypes = {
+    index: PropTypes.number.isRequired,
     canvasTimeStart: PropTypes.number.isRequired,
     canvasTimeEnd: PropTypes.number.isRequired,
     canvasWidth: PropTypes.number.isRequired,
@@ -40,7 +41,8 @@ export default class Item extends Component {
     canSelect: PropTypes.bool,
     topOffset: PropTypes.number,
     dimensions: PropTypes.object,
-    groupTops: PropTypes.array,
+    groupTop: PropTypes.number,
+    //groupTops: PropTypes.array,
     useResizeHandle: PropTypes.bool,
     moveResizeValidator: PropTypes.func,
     onItemDoubleClick: PropTypes.func
@@ -153,21 +155,25 @@ export default class Item extends Component {
   }
 
   dragGroupDelta(e) {
-    const { groupTops, order, topOffset } = this.props
+    const { groupTop, order, topOffset, index } = this.props
     if (this.state.dragging) {
       if (!this.props.canChangeGroup) {
         return 0
       }
       let groupDelta = 0
 
-      for (var key of Object.keys(groupTops)) {
-        var item = groupTops[key]
-        if (e.pageY - topOffset > item) {
-          groupDelta = parseInt(key, 10) - order
-        } else {
-          break
-        }
+      if (e.pageY - topOffset > groupTop) {
+        groupDelta = parseInt(index, 10) - order
       }
+
+      // for (var key of Object.keys(groupTops)) {
+      //   var item = groupTops[key]
+      //   if (e.pageY - topOffset > item) {
+      //     groupDelta = parseInt(key, 10) - order
+      //   } else {
+      //     break
+      //   }
+      // }
 
       if (this.props.order + groupDelta < 0) {
         return 0 - this.props.order

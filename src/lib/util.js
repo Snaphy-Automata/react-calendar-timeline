@@ -8,7 +8,7 @@ import {calculateDimensions} from './utility/calendar'
 /**
  * Will stack item based on given info..
  */
-const stackItem=(
+export const stackItem=(
   item,
   group,
   index,
@@ -63,12 +63,10 @@ const stackItem=(
       dimension.height = lineHeight * itemHeightRatio
       dimension.isDragging = isDragging
     }
-
-    return { dimension, groupHeight: lineHeight }
+    const groupTop = lineHeight * index
+    return { dimension, groupHeight: lineHeight, groupTop }
   }
   return {}
 }
 
-
-
-export default stackItem;
+export default  stackItem

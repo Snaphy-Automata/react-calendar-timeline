@@ -4,6 +4,14 @@ import React, { Component } from 'react'
 import { _get, arraysEqual } from '../utility/generic'
 import { List} from 'react-virtualized';
 
+
+const getGroupHeight = (index, props)=>{
+  const {stackItem} = props
+  const {groupHeight}    = stackItem(index)
+  return groupHeight;
+}
+
+
 export default class Sidebar extends Component {
   static propTypes = {
     groups: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
@@ -59,18 +67,12 @@ export default class Sidebar extends Component {
   }
 
 
-  getGroupHeight(index, props){
-    const {stackItem} = props
-    const {groupHeight}    = stackItem(index)
-    return groupHeight;
-  }
-
 
   /**
    * Will calculate row heights..
    */
   rowHeight({index}, props){
-    return this.getGroupHeight(index, props)
+    return getGroupHeight(index, props)
   }
 
   rowRenderer({
@@ -84,7 +86,7 @@ export default class Sidebar extends Component {
 
     const { groupIdKey, groupTitleKey, groupRightTitleKey } = props.keys
     const group = props.groups[index]
-    const groupHeight = this.getGroupHeight(index, props)
+    const groupHeight = getGroupHeight(index, props)
     const elementStyle = {
       ...style,
       height: `${groupHeight - 1}px`,
