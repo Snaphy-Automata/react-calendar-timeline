@@ -12,7 +12,6 @@ import ScrollElement from './scroll/ScrollElement'
 import MarkerCanvas from './markers/MarkerCanvas'
 import RowItems from './rowItems/rowItems';
 import windowResizeDetector from '../resize-detector/window'
-import { ScrollSync } from 'react-virtualized'
 import {
   getMinUnit,
   getNextUnit,
@@ -38,8 +37,8 @@ export default class ReactCalendarTimeline extends Component {
     //Update 6th Sept 2018
     //By Robins Gupta
     //Specifying the screen height is necessary..
-    setListReference: PropTypes.func,
-    setRowListRef: PropTypes.func,
+    setListReference: PropTypes.func.isRequired,
+    setRowListRef: PropTypes.func.isRequired,
     screenHeight: PropTypes.number.isRequired,
 
     groups: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
@@ -377,6 +376,11 @@ export default class ReactCalendarTimeline extends Component {
       groupTops
     })
     this.scrollComponent.scrollLeft = width
+  }
+
+
+  getHeight(){
+    return (this.props.groups.length * this.props.lineHeight);
   }
 
   // FIXME: this function calls set state EVERY TIME YOU SCROLL
@@ -1228,8 +1232,10 @@ export default class ReactCalendarTimeline extends Component {
       groupTops = stackResults.groupTops
     }
 
+    const totalListHeight = this.getHeight()
+
     const outerComponentStyle = {
-      //height: `${this.props.screenHeight}px`
+      height: `${totalListHeight}px`
     }
 
     return (
