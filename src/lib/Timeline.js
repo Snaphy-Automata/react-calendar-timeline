@@ -1261,7 +1261,7 @@ export default class ReactCalendarTimeline extends Component {
                 <ScrollElement
                   scrollRef={el => (this.scrollComponent = el)}
                   width={width}
-                  height={this.props.screenHeight}
+                  height={height}
                   onZoom={this.changeZoom}
                   onWheelZoom={this.handleWheelZoom}
                   traditionalZoom={traditionalZoom}

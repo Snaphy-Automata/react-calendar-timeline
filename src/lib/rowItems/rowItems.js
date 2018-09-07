@@ -161,7 +161,10 @@ export default class RowItems extends Component {
     return (
       <div
         key={key}
-        style={style}
+        style={{
+          ...style,
+          height: "24px"
+        }}
       >
       <GroupRow
         clickTolerance={clickTolerance}
@@ -171,7 +174,7 @@ export default class RowItems extends Component {
         isEvenRow={index % 2 === 0}
         style={{
           width: `${this.props.canvasWidth}px`,
-          height: `${groupHeights[index] - 1}px`
+          height: `${groupHeights[index] - 1}px`,
         }}
       />
       {isVisible &&

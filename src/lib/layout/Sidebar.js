@@ -60,7 +60,7 @@ export default class Sidebar extends Component {
    * Will calculate row heights..
    */
   rowHeight({index}, groupHeights){
-    return groupHeights[index] - 1;
+    return groupHeights[index];
   }
 
   rowRenderer({
@@ -77,9 +77,7 @@ export default class Sidebar extends Component {
       ...style,
       height: `${groupHeights[index] - 1}px`,
       lineHeight: `${groupHeights[index] - 1}px`,
-      width: "93%",
-      lineHeight: "23px",
-      height: "23px"
+      width: "93%"
     }
 
     return (
