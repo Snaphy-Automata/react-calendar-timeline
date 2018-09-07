@@ -34,9 +34,9 @@ export const stackItem=(
   const canvasTimeEnd = canvasTimeStart + zoom * 3
   const canvasWidth = width * 3
 
-  const visibleItem = _get(item, keys.itemTimeStartKey) <= canvasTimeEnd && _get(item, keys.itemTimeEndKey) >= canvasTimeStart
+  //const visibleItem = _get(item, keys.itemTimeStartKey) <= canvasTimeEnd && _get(item, keys.itemTimeEndKey) >= canvasTimeStart
 
-  if(visibleItem){
+  //if(visibleItem){
     const itemId = _get(item, keys.itemIdKey)
     const isDragging = itemId === draggingItem
     const isResizing = itemId === resizingItem
@@ -65,8 +65,12 @@ export const stackItem=(
     }
     const groupTop = lineHeight * index
     return { dimension, groupHeight: lineHeight, groupTop }
-  }
-  return {}
+  // }
+  // return {
+  //   dimension:{
+  //     height: lineHeight * itemHeightRatio
+  //   }
+  // }
 }
 
 export default  stackItem
