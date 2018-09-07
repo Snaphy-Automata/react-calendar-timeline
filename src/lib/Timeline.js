@@ -15,11 +15,11 @@ import windowResizeDetector from '../resize-detector/window'
 import {
   getMinUnit,
   getNextUnit,
-  stack,
-  nostack,
-  calculateDimensions,
-  getGroupOrders,
-  getVisibleItems,
+  // stack,
+  // nostack,
+  // calculateDimensions,
+  // getGroupOrders,
+  // getVisibleItems,
   calculateTimeForXPosition
 } from './utility/calendar'
 import { _get, _length } from './utility/generic'
@@ -456,6 +456,7 @@ export default class ReactCalendarTimeline extends Component {
       visibleTimeEnd,
       width
     } = this.state
+    console.log("Updating dimensions");
     // const { dimensionItems, height, groupHeights, groupTops } = this.stackItems(
     //   items,
     //   groups,
@@ -466,6 +467,7 @@ export default class ReactCalendarTimeline extends Component {
     // )
 
     //this.setState({ dimensionItems, height, groupHeights, groupTops })
+    this.setState({});
   }
 
   // called when the visible time changes

@@ -74,30 +74,32 @@ export default class RowItems extends Component {
     selected: []
   }
 
-  shouldComponentUpdate(nextProps) {
-    return !(
-      nextProps.lineCount === this.props.lineCount &&
-      //nextProps.groupHeights === this.props.groupHeights &&
-      arraysEqual(nextProps.groups, this.props.groups) &&
-      arraysEqual(nextProps.items, this.props.items) &&
-      nextProps.keys === this.props.keys &&
-      nextProps.canvasTimeStart === this.props.canvasTimeStart &&
-      nextProps.canvasTimeEnd === this.props.canvasTimeEnd &&
-      nextProps.canvasWidth === this.props.canvasWidth &&
-      nextProps.selectedItem === this.props.selectedItem &&
-      nextProps.selected === this.props.selected &&
-      nextProps.dragSnap === this.props.dragSnap &&
-      nextProps.minResizeWidth === this.props.minResizeWidth &&
-      nextProps.canChangeGroup === this.props.canChangeGroup &&
-      nextProps.canMove === this.props.canMove &&
-      nextProps.canResize === this.props.canResize &&
-      nextProps.canSelect === this.props.canSelect &&
-      //nextProps.dimensionItems === this.props.dimensionItems &&
-      nextProps.topOffset === this.props.topOffset &&
-      nextProps.minimumWidthForItemContentVisibility ===
-        this.props.minimumWidthForItemContentVisibility
-    )
-  }
+  // shouldComponentUpdate(nextProps) {
+  //   console.log("Reloading Row Items", nextProps);
+  //   return true;
+  //   return !(
+  //     nextProps.lineCount === this.props.lineCount &&
+  //     //nextProps.groupHeights === this.props.groupHeights &&
+  //     //arraysEqual(nextProps.groups, this.props.groups) &&
+  //     //arraysEqual(nextProps.items, this.props.items) &&
+  //     nextProps.keys === this.props.keys &&
+  //     nextProps.canvasTimeStart === this.props.canvasTimeStart &&
+  //     nextProps.canvasTimeEnd === this.props.canvasTimeEnd &&
+  //     nextProps.canvasWidth === this.props.canvasWidth &&
+  //     nextProps.selectedItem === this.props.selectedItem &&
+  //     nextProps.selected === this.props.selected &&
+  //     nextProps.dragSnap === this.props.dragSnap &&
+  //     nextProps.minResizeWidth === this.props.minResizeWidth &&
+  //     nextProps.canChangeGroup === this.props.canChangeGroup &&
+  //     nextProps.canMove === this.props.canMove &&
+  //     nextProps.canResize === this.props.canResize &&
+  //     nextProps.canSelect === this.props.canSelect &&
+  //     //nextProps.dimensionItems === this.props.dimensionItems &&
+  //     nextProps.topOffset === this.props.topOffset &&
+  //     nextProps.minimumWidthForItemContentVisibility ===
+  //       this.props.minimumWidthForItemContentVisibility
+  //   )
+  // }
 
   // TODO: this is exact same function as utility
   getGroupOrders() {
