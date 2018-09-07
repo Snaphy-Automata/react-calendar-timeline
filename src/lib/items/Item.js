@@ -519,12 +519,14 @@ export default class Item extends Component {
       (this.props.item.className ? ` ${this.props.item.className}` : '')
 
     const style = {
+      ...this.props.style,
       ...this.props.item.style,
       left: `${dimensions.left}px`,
       top: `${dimensions.top}px`,
       width: `${dimensions.width}px`,
       height: `${dimensions.height}px`,
-      lineHeight: `${dimensions.height}px`
+      lineHeight: `${dimensions.height}px`,
+      top: 0,
     }
 
     const showInnerContents =

@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
 import { _get, arraysEqual } from '../utility/generic'
-
 import { List} from 'react-virtualized';
 
 export default class Sidebar extends Component {
@@ -75,9 +74,12 @@ export default class Sidebar extends Component {
     const { groupIdKey, groupTitleKey, groupRightTitleKey } = props.keys
     const group = props.groups[index]
     const elementStyle = {
-      height: `${groupHeights[index] - 1}px`,
-      lineHeight: `${groupHeights[index] - 1}px`,
       ...style,
+      //height: `${groupHeights[index] - 1}px`,
+      //lineHeight: `${groupHeights[index] - 1}px`,
+      width: "93%",
+      lineHeight: "23px",
+      height: "23px"
     }
 
     return (
@@ -127,6 +129,10 @@ export default class Sidebar extends Component {
             rowCount={this.props.groups.length}
             rowHeight={this.getRowHeight}
             rowRenderer={this.getRow}
+            style={{
+              height: "100%",
+              overflow: "hidden"
+            }}
           />
       </div>
     </div>

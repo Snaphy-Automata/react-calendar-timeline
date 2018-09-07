@@ -10,7 +10,7 @@ import VerticalLines from './lines/VerticalLines'
 import GroupRows from './row/GroupRows'
 import ScrollElement from './scroll/ScrollElement'
 import MarkerCanvas from './markers/MarkerCanvas'
-
+import RowItems from './rowItems/rowItems';
 import windowResizeDetector from '../resize-detector/window'
 
 import {
@@ -777,6 +777,64 @@ export default class ReactCalendarTimeline extends Component {
     )
   }
 
+
+  rowItems(
+    canvasTimeStart,
+    zoom,
+    canvasTimeEnd,
+    canvasWidth,
+    minUnit,
+    dimensionItems,
+    groupHeights,
+    groupTops,
+    screenHeight
+  ){
+    return (
+      <RowItems
+        //Row Props
+        clickTolerance={this.props.clickTolerance}
+        onRowClick={this.handleRowClick}
+        onRowDoubleClick={this.handleRowDoubleClick}
+
+        //Items Props
+        canvasTimeStart={canvasTimeStart}
+        canvasTimeEnd={canvasTimeEnd}
+        canvasWidth={canvasWidth}
+        lineCount={_length(this.props.groups)}
+        dimensionItems={dimensionItems}
+        minUnit={minUnit}
+        groupHeights={groupHeights}
+        groupTops={groupTops}
+        items={this.props.items}
+        groups={this.props.groups}
+        keys={this.props.keys}
+        selectedItem={this.state.selectedItem}
+        dragSnap={this.props.dragSnap}
+        minResizeWidth={this.props.minResizeWidth}
+        canChangeGroup={this.props.canChangeGroup}
+        canMove={this.props.canMove}
+        canResize={this.props.canResize}
+        useResizeHandle={this.props.useResizeHandle}
+        canSelect={this.props.canSelect}
+        moveResizeValidator={this.props.moveResizeValidator}
+        topOffset={this.state.topOffset}
+        itemSelect={this.selectItem}
+        itemDrag={this.dragItem}
+        itemDrop={this.dropItem}
+        onItemDoubleClick={this.doubleClickItem}
+        onItemContextMenu={this.contextMenuClickItem}
+        itemResizing={this.resizingItem}
+        itemResized={this.resizedItem}
+        itemRenderer={this.props.itemRenderer}
+        selected={this.props.selected}
+        screenHeight={screenHeight}
+        minimumWidthForItemContentVisibility={
+          this.props.minimumWidthForItemContentVisibility
+        }
+      />
+    )
+  }
+
   items(
     canvasTimeStart,
     zoom,
@@ -1211,8 +1269,21 @@ export default class ReactCalendarTimeline extends Component {
                 onContextMenu={this.handleScrollContextMenu}
               >
                 <MarkerCanvas>
-                  <div>
-                  {this.items(
+                  {/* <div> */}
+                    {
+                      this.rowItems(
+                        canvasTimeStart,
+                        zoom,
+                        canvasTimeEnd,
+                        canvasWidth,
+                        minUnit,
+                        dimensionItems,
+                        groupHeights,
+                        groupTops,
+                        this.props.screenHeight,
+                      )
+                    }
+                  {/* {this.items(
                     canvasTimeStart,
                     zoom,
                     canvasTimeEnd,
@@ -1221,8 +1292,8 @@ export default class ReactCalendarTimeline extends Component {
                     dimensionItems,
                     groupHeights,
                     groupTops
-                  )}
-                  {/* {this.verticalLines(
+                  )} */}
+                  {this.verticalLines(
                     canvasTimeStart,
                     canvasTimeEnd,
                     canvasWidth,
@@ -1230,10 +1301,10 @@ export default class ReactCalendarTimeline extends Component {
                     timeSteps,
                     height,
                     headerHeight
-                  )} */}
-                  {this.horizontalLines(canvasWidth, groupHeights)}
+                  )}
+                  {/* {this.horizontalLines(canvasWidth, groupHeights)} */}
                   {/* {this.infoLabel()} */}
-                  </div>
+                  {/* </div> */}
                   {/* {this.items(
                     canvasTimeStart,
                     zoom,
