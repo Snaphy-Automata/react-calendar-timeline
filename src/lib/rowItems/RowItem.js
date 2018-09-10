@@ -9,6 +9,7 @@ import GroupRow                     from '../row/GroupRow'
 import { _get,  } from '../utility/generic'
 import Item                         from '../items/Item'
 
+
 const canResizeLeft = (item, canResize) => {
   const value =
     _get(item, 'canResize') !== undefined ? _get(item, 'canResize') : canResize
@@ -21,9 +22,7 @@ const canResizeRight = (item, canResize) => {
   return value === 'right' || value === 'both' || value === true
 }
 
-
-const RowItem = (props) =>{
-
+const RowItem = (props) => {
   //First check if the item is visible or not...
   const {
     stackItem,
@@ -45,7 +44,7 @@ const RowItem = (props) =>{
   const isVisible = _get(item, itemTimeStartKey) <= canvasTimeEnd && _get(item, itemTimeEndKey) >= canvasTimeStart
   return (
     <div
-        key={props.key}
+        key={`horizontal-line-${index}`}
         style={{
           ...props.style,
           height: "24px"
@@ -71,7 +70,7 @@ const RowItem = (props) =>{
           keys={props.keys}
           order={index}
           dimensions={dimension}
-          selected={isSelected(item, itemIdKey)}
+          selected={props.isSelected(item, itemIdKey)}
           canChangeGroup={
             _get(item, 'canChangeGroup') !== undefined
               ? _get(item, 'canChangeGroup')
@@ -128,7 +127,6 @@ RowItem.propTypes = {
   itemId: PropTypes.string.isRequired,
   item: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
-  key: PropTypes.string.isRequired,
   //Row
   lineCount: PropTypes.number.isRequired,
   onRowClick: PropTypes.func.isRequired,
@@ -163,6 +161,7 @@ RowItem.propTypes = {
   selected: PropTypes.array,
   topOffset: PropTypes.number,
   useResizeHandle: PropTypes.bool,
+  isSelected: PropTypes.func.isRequired,
 }
 
 export default RowItem

@@ -57,6 +57,22 @@ export default class RowItems extends Component {
     selected: []
   }
 
+  constructor(props){
+    super(props)
+    this.isItemSelected = this.isSelected.bind(this)
+    this.renderItem     = this.cellRenderer.bind(this)
+    this.ItemComponent  = props.getItemHoc(RowItem)
+  }
+
+
+  isSelected(item, itemIdKey) {
+    if (!this.props.selected) {
+      return this.props.selectedItem === _get(item, itemIdKey)
+    } else {
+      let target = _get(item, itemIdKey)
+      return this.props.selected.includes(target)
+    }
+  }
 
 
 
@@ -67,11 +83,11 @@ export default class RowItems extends Component {
     } = this.props
 
     const item = items[index]
+    const ItemComponent = this.ItemComponent;
 
-    const ItemComponent = this.props.getItemHoc(RowItem)
 
     return (
-      <ItemComponent {...this.props} itemId={item.id} key={key} style={style} index={index} />
+      <ItemComponent {...this.props} isSelected={this.isItemSelected} itemId={item.id} key={key} style={style} index={index} />
     )
   }
 
@@ -95,7 +111,7 @@ export default class RowItems extends Component {
         height={screenHeight}
         rowCount={this.props.items.length}
         rowHeight={height}
-        rowRenderer={this.cellRenderer.bind(this)}
+        rowRenderer={this.renderItem}
         style={{
           height: "100%",
           overflow: "hidden"

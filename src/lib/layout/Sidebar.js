@@ -17,7 +17,6 @@ export default class Sidebar extends Component {
     //Update 6th sept 2018
     //Added by Robins.
     setListReference: PropTypes.func,
-    stackItem: PropTypes.func.isRequired,
     getItemHeight: PropTypes.func.isRequired,
     lineHeight: PropTypes.number.isRequired,
     itemHeightRatio: PropTypes.number.isRequired,
@@ -28,10 +27,10 @@ export default class Sidebar extends Component {
 
   constructor(props){
     super(props)
-    const rowRenderer = this.rowRenderer;
     this.getRow = (options)=>{
       return this.rowRenderer(options, this.props)
     }
+    this.getRowItem = this.getRow.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -91,7 +90,7 @@ export default class Sidebar extends Component {
             height={screenHeight}
             rowCount={this.props.groups.length}
             rowHeight={height}
-            rowRenderer={this.getRow.bind(this)}
+            rowRenderer={this.getRowItem}
             style={{
               height: "100%",
               overflow: "hidden"
