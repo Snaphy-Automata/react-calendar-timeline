@@ -56,7 +56,7 @@ export default class Sidebar extends Component {
     const group = props.groups[index]
 
     return (
-      <GroupItemComponent style={style} {...props} key={key} index={index} itemId={group.id} />
+      <GroupItemComponent style={style} {...props} key={key} index={index} itemId={group} />
     )
   }
 

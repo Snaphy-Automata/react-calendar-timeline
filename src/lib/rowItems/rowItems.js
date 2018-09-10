@@ -87,7 +87,7 @@ export default class RowItems extends Component {
 
 
     return (
-      <ItemComponent {...this.props} isSelected={this.isItemSelected} itemId={item.id} key={key} style={style} index={index} />
+      <ItemComponent {...this.props} isSelected={this.isItemSelected} itemId={item} key={key} style={style} index={index} />
     )
   }
 
