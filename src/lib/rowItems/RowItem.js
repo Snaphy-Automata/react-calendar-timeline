@@ -71,7 +71,7 @@ const RowItem = (props) =>{
           keys={props.keys}
           order={index}
           dimensions={dimension}
-          selected={this.isSelected(item, itemIdKey)}
+          selected={isSelected(item, itemIdKey)}
           canChangeGroup={
             _get(item, 'canChangeGroup') !== undefined
               ? _get(item, 'canChangeGroup')

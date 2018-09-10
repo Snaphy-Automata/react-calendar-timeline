@@ -65,12 +65,6 @@ export const stackItem=(
     }
     const groupTop = lineHeight * index
     return { dimension, groupHeight: lineHeight, groupTop }
-  // }
-  // return {
-  //   dimension:{
-  //     height: lineHeight * itemHeightRatio
-  //   }
-  // }
 }
 
 export default  stackItem

@@ -3,14 +3,7 @@ import React, { Component } from 'react'
 
 import { _get, arraysEqual } from '../utility/generic'
 import { List} from 'react-virtualized';
-
-
-const getGroupHeight = (index, props)=>{
-  const {stackItem} = props
-  const {groupHeight}    = stackItem(index)
-  return groupHeight;
-}
-
+import SidebarItem from './SidebarItem'
 
 export default class Sidebar extends Component {
   static propTypes = {
@@ -25,21 +18,19 @@ export default class Sidebar extends Component {
     //Added by Robins.
     setListReference: PropTypes.func,
     stackItem: PropTypes.func.isRequired,
+    getItemHeight: PropTypes.func.isRequired,
+    lineHeight: PropTypes.number.isRequired,
+    itemHeightRatio: PropTypes.number.isRequired,
     screenHeight: PropTypes.number.isRequired,
+    getItemHoc: PropTypes.func.isRequired,
   }
 
 
   constructor(props){
     super(props)
-    const rowHeight   = this.rowHeight.bind(this);
     const rowRenderer = this.rowRenderer;
-    const renderGroupContent = this.renderGroupContent;
-    this.getRowHeight = (options)=>{
-      return rowHeight(options, props);
-    }
-
     this.getRow = (options)=>{
-      return rowRenderer(options, props, renderGroupContent)
+      return this.rowRenderer(options, this.props)
     }
   }
 
@@ -55,64 +46,21 @@ export default class Sidebar extends Component {
   }
 
 
-  renderGroupContent(group, isRightSidebar, groupTitleKey, groupRightTitleKey, props) {
-    if (props.groupRenderer) {
-      return React.createElement(props.groupRenderer, {
-        group,
-        isRightSidebar
-      })
-    } else {
-      return _get(group, isRightSidebar ? groupRightTitleKey : groupTitleKey)
-    }
-  }
-
-
-
-  /**
-   * Will calculate row heights..
-   */
-  rowHeight({index}, props){
-    return getGroupHeight(index, props)
-  }
-
   rowRenderer({
     key,         // Unique key within array of rows
     index,       // Index of row within collection
     isScrolling, // The List is currently being scrolled
     isVisible,   // This row is visible within the List (eg it is not an overscanned row)
     style        // Style object to be applied to row (to position it)
-  }, props, renderGroupContent) {
-    const { isRightSidebar } = props
-
-    const { groupIdKey, groupTitleKey, groupRightTitleKey } = props.keys
+  }, props) {
+    const GroupItemComponent = props.getItemHoc(SidebarItem)
     const group = props.groups[index]
-    const groupHeight = getGroupHeight(index, props)
-    const elementStyle = {
-      ...style,
-      height: `${groupHeight - 1}px`,
-      lineHeight: `${groupHeight - 1}px`,
-      width: "93%"
-    }
 
     return (
-      <div
-          key={key}
-          className={
-            'rct-sidebar-row' +
-            (index % 2 === 0 ? ' rct-sidebar-row-even' : ' rct-sidebar-row-odd')
-          }
-          style={elementStyle}
-        >
-          {renderGroupContent(
-            group,
-            isRightSidebar,
-            groupTitleKey,
-            groupRightTitleKey,
-            props,
-          )}
-        </div>
+      <GroupItemComponent style={style} {...props} key={key} index={index} itemId={group.id} />
     )
   }
+
 
   render() {
     const { width, isRightSidebar, screenHeight, setListReference } = this.props
@@ -122,9 +70,12 @@ export default class Sidebar extends Component {
       //height: `${screenHeight}px`
     }
 
-    const groupsStyle = {
+    const groupsStyle  = {
       width: `${width}px`
     }
+
+    const { getItemHeight, lineHeight, itemHeightRatio } = this.props
+    const height = getItemHeight(lineHeight, itemHeightRatio)
 
     return (
       <div
@@ -139,8 +90,8 @@ export default class Sidebar extends Component {
             width={width}
             height={screenHeight}
             rowCount={this.props.groups.length}
-            rowHeight={this.getRowHeight}
-            rowRenderer={this.getRow}
+            rowHeight={height}
+            rowRenderer={this.getRow.bind(this)}
             style={{
               height: "100%",
               overflow: "hidden"

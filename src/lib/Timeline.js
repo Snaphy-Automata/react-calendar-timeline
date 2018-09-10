@@ -688,7 +688,7 @@ export default class ReactCalendarTimeline extends Component {
     canvasWidth,
     minUnit,
     timeSteps,
-    height
+    height,
   ) {
     return (
       <VerticalLines
@@ -944,11 +944,13 @@ export default class ReactCalendarTimeline extends Component {
       sidebarWidth > 0 && (
         <Sidebar
           groups={this.props.groups}
+          getItemHoc={this.props.getItemHoc}
           groupRenderer={this.props.groupRenderer}
           keys={this.props.keys}
           width={this.props.sidebarWidth}
-          stackItem={this.stackItem.bind(this)}
-          getItemHoc={this.props.getItemHoc}
+          lineHeight={this.props.lineHeight}
+          itemHeightRatio={this.props.itemHeightRatio}
+          getItemHeight={this.getItemHeight}
           screenHeight={screenHeight}
           setListReference={this.props.setListReference}
         />
