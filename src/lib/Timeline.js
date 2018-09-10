@@ -393,9 +393,9 @@ export default class ReactCalendarTimeline extends Component {
       )
     }
 
-    // this.setState({
-    //   currentScrollLeft: scrollX
-    // })
+    this.setState({
+      currentScrollLeft: scrollX
+    })
   }
 
   componentWillReceiveProps(nextProps) {

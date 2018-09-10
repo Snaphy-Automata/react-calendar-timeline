@@ -122,7 +122,6 @@ export default class TimelineElementsHeader extends Component {
       headerLabelHeight,
       hasRightSidebar
     } = this.props
-
     const ratio = canvasWidth / (canvasTimeEnd - canvasTimeStart)
     const twoHeaders = minUnit !== 'year'
 

@@ -39,7 +39,6 @@ class Header extends Component {
     }
 
     const headerClass = stickyHeader ? 'header-sticky' : ''
-
     return (
       <div
         className={`rct-header-container ${headerClass}`}
