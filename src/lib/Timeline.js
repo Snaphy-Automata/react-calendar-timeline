@@ -656,7 +656,7 @@ export default class ReactCalendarTimeline extends Component {
       draggingItem: item,
       dragTime: dragTime,
       newGroupOrder: newGroupOrder,
-      dragGroupTitle: newGroup ? _get(newGroup, keys.groupTitleKey) : ''
+      //dragGroupTitle: newGroup ? _get(newGroup, keys.groupTitleKey) : ''
     })
   }
 
@@ -712,10 +712,11 @@ export default class ReactCalendarTimeline extends Component {
     if (this.props.onCanvasClick == null) return
 
     const time = this.getTimeFromRowClickEvent(e)
-    const groupId = _get(
-      this.props.groups[rowIndex],
-      this.props.keys.groupIdKey
-    )
+    // const groupId = _get(
+    //   this.props.groups[rowIndex],
+    //   this.props.keys.groupIdKey
+    // )
+    const groupId = this.props.groups[rowIndex]
     this.props.onCanvasClick(groupId, time, e)
   }
 
@@ -723,10 +724,11 @@ export default class ReactCalendarTimeline extends Component {
     if (this.props.onCanvasDoubleClick == null) return
 
     const time = this.getTimeFromRowClickEvent(e)
-    const groupId = _get(
-      this.props.groups[rowIndex],
-      this.props.keys.groupIdKey
-    )
+    // const groupId = _get(
+    //   this.props.groups[rowIndex],
+    //   this.props.keys.groupIdKey
+    // )
+    const groupId = this.props.groups[rowIndex]
     this.props.onCanvasDoubleClick(groupId, time, e)
   }
 
@@ -772,10 +774,7 @@ export default class ReactCalendarTimeline extends Component {
         canvasTimeEnd={canvasTimeEnd}
         canvasWidth={canvasWidth}
         lineCount={_length(this.props.groups)}
-        //dimensionItems={dimensionItems}
         minUnit={minUnit}
-        // groupHeights={groupHeights}
-        // groupTops={groupTops}
         items={this.props.items}
         groups={this.props.groups}
         keys={this.props.keys}
