@@ -33,16 +33,16 @@ export default class Sidebar extends Component {
     this.getRowItem = this.getRow.bind(this);
   }
 
-  shouldComponentUpdate(nextProps) {
-    return !(
-      arraysEqual(nextProps.groups, this.props.groups) &&
-      nextProps.keys === this.props.keys &&
-      nextProps.width === this.props.width
-      //Removed by Robins 7th Sept 2018
-      //nextProps.groupHeights === this.props.groupHeights
-      //nextProps.height === this.props.height
-    )
-  }
+  // shouldComponentUpdate(nextProps) {
+  //   return !(
+  //     arraysEqual(nextProps.groups, this.props.groups) &&
+  //     nextProps.keys === this.props.keys &&
+  //     nextProps.width === this.props.width
+  //     //Removed by Robins 7th Sept 2018
+  //     //nextProps.groupHeights === this.props.groupHeights
+  //     //nextProps.height === this.props.height
+  //   )
+  // }
 
 
   rowRenderer({
