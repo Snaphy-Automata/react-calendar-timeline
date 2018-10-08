@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
+import List from 'react-virtualized/dist/commonjs/List'
 
 import { _get, arraysEqual } from '../utility/generic'
-import { List} from 'react-virtualized';
 import SidebarItem from './SidebarItem'
 
 export default class Sidebar extends Component {

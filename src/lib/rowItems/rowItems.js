@@ -2,7 +2,7 @@
 //7th Sept 2018
 import PropTypes                    from 'prop-types'
 import React, { Component }         from 'react'
-import { List }                     from 'react-virtualized'
+import List                         from 'react-virtualized/dist/commonjs/List';
 
 import { _get }                     from '../utility/generic'
 import RowItem                      from './RowItem'
