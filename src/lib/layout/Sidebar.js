@@ -93,7 +93,9 @@ export default class Sidebar extends Component {
             rowRenderer={this.getRowItem}
             style={{
               height: "100%",
-              overflow: "hidden"
+              overflow: "hidden",
+              overflowX: false,
+              overflowY: false
             }}
           />
       </div>
