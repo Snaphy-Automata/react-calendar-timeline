@@ -3,7 +3,9 @@ import isEqual from 'lodash.isequal'
 // so we could use both immutable.js objects and regular objects
 
 export function _get(object, key) {
-  return typeof object.get === 'function' ? object.get(key) : object[key]
+  if(object){
+    return typeof object.get === 'function' ? object.get(key) : object[key]
+  }
 }
 
 export function _length(object) {

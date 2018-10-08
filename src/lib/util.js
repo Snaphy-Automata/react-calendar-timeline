@@ -59,7 +59,7 @@ export const stackItem=(
       dimension.order = isDragging
         ? newGroupOrder
         : index
-      dimension.stack = !item.isOverlay
+      dimension.stack = item?!item.isOverlay:false
       dimension.height = lineHeight * itemHeightRatio
       dimension.isDragging = isDragging
     }
