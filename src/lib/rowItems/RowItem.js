@@ -125,7 +125,7 @@ RowItem.propTypes = {
   getItemHoc: PropTypes.func.isRequired,
   style: PropTypes.object.isRequired,
   itemId: PropTypes.string.isRequired,
-  item: PropTypes.object.isRequired,
+  item: PropTypes.object,
   index: PropTypes.number.isRequired,
   //Row
   lineCount: PropTypes.number.isRequired,
