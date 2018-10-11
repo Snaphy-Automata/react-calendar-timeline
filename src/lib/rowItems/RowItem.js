@@ -41,7 +41,9 @@ const RowItem = (props) => {
 
   const { itemIdKey, itemTimeStartKey, itemTimeEndKey } = props.keys
   const {dimension, groupHeight, groupTop} = stackItem(index, item)
-  const isVisible = _get(item, itemTimeStartKey) <= canvasTimeEnd && _get(item, itemTimeEndKey) >= canvasTimeStart
+  const startDateMs = _get(item, itemTimeStartKey)
+  const endDateMs   = _get(item, itemTimeEndKey)
+  const isVisible = startDateMs <= canvasTimeEnd && endDateMs >= canvasTimeStart
   return (
     <div
         key={`horizontal-line-${index}`}
@@ -61,6 +63,8 @@ const RowItem = (props) => {
           height: `${groupHeight - 1}px`,
         }}
       />
+      Visible Date {isVisible}, Start Date {startDateMs} End Date {endDateMs} canvasStart: {canvasTimeStart} canvasTimeEnd: {canvasTimeEnd}
+      IsUnassigned {item && item.isUnassigned}
       {isVisible &&
         <Item
           index={index}
