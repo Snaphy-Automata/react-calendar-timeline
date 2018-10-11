@@ -104,7 +104,7 @@ export default class RowItems extends Component {
     return (
       <List
         ref={(instance) => {
-          setRowListRef(instance);
+          setRowListRef?setRowListRef(instance):null;
         }}
         className="rct-items rct-horizontal-lines"
         width={this.props.canvasWidth}

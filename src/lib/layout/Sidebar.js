@@ -84,7 +84,7 @@ export default class Sidebar extends Component {
         <div style={groupsStyle}>
           <List
             ref={(instance) => {
-              setListReference(instance);
+              setListReference?setListReference(instance):null;
             }}
             width={width}
             height={screenHeight}
