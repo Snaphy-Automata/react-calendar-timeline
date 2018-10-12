@@ -63,8 +63,6 @@ const RowItem = (props) => {
           height: `${groupHeight - 1}px`,
         }}
       />
-      Visible Date {isVisible}, Start Date {startDateMs} End Date {endDateMs} canvasStart: {canvasTimeStart} canvasTimeEnd: {canvasTimeEnd}
-      IsUnassigned {item && item.isUnassigned}
       {isVisible &&
         <Item
           index={index}
