@@ -20,7 +20,8 @@ const renderGroupContent = (group, isRightSidebar, groupTitleKey, groupRightTitl
   if (props.groupRenderer) {
     return React.createElement(props.groupRenderer, {
       group,
-      isRightSidebar
+      isRightSidebar,
+      isItemSelected: props.isItemSelected,
     })
   } else {
     return _get(group, isRightSidebar ? groupRightTitleKey : groupTitleKey)
@@ -53,13 +54,20 @@ const SidebarItem = (props)=>{
     width: "93%"
   }
 
+  let className = 'rct-sidebar-row' + (index % 2 === 0 ? ' rct-sidebar-row-even' : ' rct-sidebar-row-odd')
+  if(props.isItemSelected){
+    className = `${className} selected`
+  }
+
+  //Check group type..
+  if(props.item && props.item.type === "section"){
+    className = `${className} section`
+  }
+
   return (
       <div
         key={key}
-        className={
-          'rct-sidebar-row' +
-          (index % 2 === 0 ? ' rct-sidebar-row-even' : ' rct-sidebar-row-odd')
-        }
+        className={className}
         style={elementStyle}>
         {renderGroupContent(
           item,
