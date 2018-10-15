@@ -47,7 +47,7 @@ const SidebarItem = (props)=>{
 
   const { groupTitleKey, groupRightTitleKey } = props.keys
   const groupHeight = getItemHeight(lineHeight, itemHeightRatio)
-  const elementStyle = {
+  let elementStyle = {
     ...style,
     height: `${groupHeight - 1}px`,
     lineHeight: `${groupHeight - 1}px`,
@@ -62,6 +62,23 @@ const SidebarItem = (props)=>{
   //Check group type..
   if(props.item && props.item.type === "section"){
     className = `${className} section`
+    /*
+          height: 23px;
+          left: 0px;
+          position: absolute;
+          top: 5100px;
+          width: 92%;
+          line-height: 24px;
+          border: 1px solid;
+          border-color: red !important;
+    */
+  //  elementStyle = {
+  //   ...elementStyle,
+  //   height: `23px`,
+  //   lineHeight: `23px`,
+  //   width: "92%"
+  // }
+
   }
 
   return (
