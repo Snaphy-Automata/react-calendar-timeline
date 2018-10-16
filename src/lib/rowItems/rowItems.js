@@ -54,25 +54,25 @@ export default class RowItems extends PureComponent {
   }
 
   static defaultProps = {
-    selected: []
+    //selected: []
   }
 
   constructor(props){
     super(props)
-    this.isItemSelected = this.isSelected.bind(this)
+    //this.isItemSelected = this.isSelected.bind(this)
     this.renderItem     = this.cellRenderer.bind(this)
     this.ItemComponent  = props.getItemHoc(RowItem)
   }
 
 
-  isSelected(item, itemIdKey) {
-    if (!this.props.selected) {
-      return this.props.selectedItem === _get(item, itemIdKey)
-    } else {
-      let target = _get(item, itemIdKey)
-      return this.props.selected.includes(target)
-    }
-  }
+  // isSelected(item, itemIdKey) {
+  //   if (!this.props.selected) {
+  //     return this.props.selectedItem === _get(item, itemIdKey)
+  //   } else {
+  //     let target = _get(item, itemIdKey)
+  //     return this.props.selected.includes(target)
+  //   }
+  // }
 
 
 
@@ -106,15 +106,15 @@ export default class RowItems extends PureComponent {
       itemRenderer,
       topOffset,
       useResizeHandle,
+      //selected,
     } = this.props
 
     const item = items[index]
     const ItemComponent = this.ItemComponent;
-
+    console.log("Renderer getting called")
 
     return (
       <ItemComponent
-      //{...this.props}
       stackItem={stackItem}
       onRowClick={onRowClick}
       onRowDoubleClick={onRowDoubleClick}
@@ -140,9 +140,9 @@ export default class RowItems extends PureComponent {
       itemRenderer={itemRenderer}
       topOffset={topOffset}
       useResizeHandle={useResizeHandle}
-
+      //selected={selected}
       keys={keys}
-      isSelected={this.isItemSelected}
+      //isSelected={this.isItemSelected}
       itemId={item}
       key={key}
       style={style}

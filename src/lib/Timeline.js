@@ -275,7 +275,7 @@ export default class ReactCalendarTimeline extends PureComponent {
 
     let visibleTimeStart = null
     let visibleTimeEnd = null
-
+    this.stackItem = this.stackItem.bind(this)
     if (this.props.defaultTimeStart && this.props.defaultTimeEnd) {
       visibleTimeStart = this.props.defaultTimeStart.valueOf()
       visibleTimeEnd = this.props.defaultTimeEnd.valueOf()
@@ -761,7 +761,7 @@ export default class ReactCalendarTimeline extends PureComponent {
 
       <RowItems
         //Update added on 7th Sept 2018
-        stackItem={this.stackItem.bind(this)}
+        stackItem={this.stackItem}
         setRowListRef={this.props.setRowListRef}
         //Row Props
         clickTolerance={this.props.clickTolerance}
@@ -796,7 +796,7 @@ export default class ReactCalendarTimeline extends PureComponent {
         itemResizing={this.resizingItem}
         itemResized={this.resizedItem}
         itemRenderer={this.props.itemRenderer}
-        selected={this.props.selected}
+        //selected={this.props.selected}
         getItemHeight={this.getItemHeight}
         screenHeight={screenHeight}
         getItemHoc={this.props.getItemHoc}
@@ -848,7 +848,7 @@ export default class ReactCalendarTimeline extends PureComponent {
         itemResizing={this.resizingItem}
         itemResized={this.resizedItem}
         itemRenderer={this.props.itemRenderer}
-        selected={this.props.selected}
+        //selected={this.props.selected}
         minimumWidthForItemContentVisibility={
           this.props.minimumWidthForItemContentVisibility
         }
