@@ -103,7 +103,7 @@ class RowItem extends PureComponent{
     const startDateMs = _get(item, itemTimeStartKey)
     const endDateMs   = _get(item, itemTimeEndKey)
     const isVisible = startDateMs <= canvasTimeEnd && endDateMs >= canvasTimeStart
-    console.log("Row Item getting rendered")
+    //console.log("Row Item getting rendered")
     return (
       <div
           key={`horizontal-line-${index}`}

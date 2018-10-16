@@ -302,7 +302,7 @@ export default class Item extends PureComponent {
           }
 
           if (this.props.onResizing) {
-            this.props.onResizing(this.itemId, resizeTime, resizeEdge)
+            this.props.onResizing(this.itemId, resizeTime, resizeEdge, this.resizeTimeDelta(e, resizeEdge))
           }
 
           this.setState({

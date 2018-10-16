@@ -75,6 +75,7 @@ export default class ReactCalendarTimeline extends PureComponent {
 
     onItemMove: PropTypes.func,
     onItemResize: PropTypes.func,
+    onItemResizing: PropTypes.func,
     onItemClick: PropTypes.func,
     onItemSelect: PropTypes.func,
     onItemDeselect: PropTypes.func,
@@ -193,6 +194,7 @@ export default class ReactCalendarTimeline extends PureComponent {
 
     onItemMove: null,
     onItemResize: null,
+    onItemResizing: null,
     onItemClick: null,
     onItemSelect: null,
     onItemDeselect: null,
@@ -669,7 +671,7 @@ export default class ReactCalendarTimeline extends PureComponent {
     }
   }
 
-  resizingItem = (item, resizeTime, edge) => {
+  resizingItem = (item, resizeTime, edge, timeDelta) => {
     if(!this.state.resizedItem){
       this.setState({
         resizingItem: item,
@@ -677,7 +679,13 @@ export default class ReactCalendarTimeline extends PureComponent {
         resizeTime: resizeTime
       })
     }
+
+    if (this.props.onItemResizing && timeDelta !== 0) {
+      this.props.onItemResizing?this.props.onItemResizing(item, resizeTime, edge):null
+    }
+
   }
+
 
   resizedItem = (item, resizeTime, edge, timeDelta) => {
     this.setState({ resizingItem: null, resizingEdge: null, resizeTime: null })
