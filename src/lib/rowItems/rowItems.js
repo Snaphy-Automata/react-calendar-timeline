@@ -48,7 +48,7 @@ export default class RowItems extends PureComponent {
     onItemDoubleClick: PropTypes.func,
     onItemContextMenu: PropTypes.func,
     itemRenderer: PropTypes.func,
-    selected: PropTypes.array,
+    //selected: PropTypes.array,
     topOffset: PropTypes.number,
     useResizeHandle: PropTypes.bool,
   }
@@ -80,6 +80,32 @@ export default class RowItems extends PureComponent {
     //First check if the item is visible or not...
     const {
       items,
+      keys,
+      stackItem,
+      onRowClick,
+      onRowDoubleClick,
+      clickTolerance,
+      canvasTimeStart,
+      canvasTimeEnd,
+      canvasWidth,
+      minimumWidthForItemContentVisibility,
+      dragSnap,
+      minResizeWidth,
+      canChangeGroup,
+      canMove,
+      canResize,
+      canSelect,
+      moveResizeValidator,
+      itemSelect,
+      itemDrag,
+      itemDrop,
+      itemResizing,
+      itemResized,
+      onItemDoubleClick,
+      onItemContextMenu,
+      itemRenderer,
+      topOffset,
+      useResizeHandle,
     } = this.props
 
     const item = items[index]
@@ -87,7 +113,40 @@ export default class RowItems extends PureComponent {
 
 
     return (
-      <ItemComponent {...this.props} isSelected={this.isItemSelected} itemId={item} key={key} style={style} index={index} />
+      <ItemComponent
+      //{...this.props}
+      stackItem={stackItem}
+      onRowClick={onRowClick}
+      onRowDoubleClick={onRowDoubleClick}
+      clickTolerance={clickTolerance}
+      canvasTimeStart={canvasTimeStart}
+      canvasTimeEnd={canvasTimeEnd}
+      canvasWidth={canvasWidth}
+      minimumWidthForItemContentVisibility={minimumWidthForItemContentVisibility}
+      dragSnap={dragSnap}
+      minResizeWidth={minResizeWidth}
+      canChangeGroup={canChangeGroup}
+      canMove={canMove}
+      canResize={canResize}
+      canSelect={canSelect}
+      moveResizeValidator={moveResizeValidator}
+      itemSelect={itemSelect}
+      itemDrag={itemDrag}
+      itemDrop={itemDrop}
+      itemResizing={itemResizing}
+      itemResized={itemResized}
+      onItemDoubleClick={onItemDoubleClick}
+      onItemContextMenu={onItemContextMenu}
+      itemRenderer={itemRenderer}
+      topOffset={topOffset}
+      useResizeHandle={useResizeHandle}
+
+      keys={keys}
+      isSelected={this.isItemSelected}
+      itemId={item}
+      key={key}
+      style={style}
+      index={index} />
     )
   }
 
