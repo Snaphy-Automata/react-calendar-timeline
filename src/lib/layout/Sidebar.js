@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import List from 'react-virtualized/dist/commonjs/List'
 
 import { _get, arraysEqual } from '../utility/generic'
 import SidebarItem from './SidebarItem'
 
-export default class Sidebar extends Component {
+export default class Sidebar extends PureComponent {
   static propTypes = {
     groups: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
     width: PropTypes.number.isRequired,

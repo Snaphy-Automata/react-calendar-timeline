@@ -544,27 +544,28 @@ export default class ReactCalendarTimeline extends PureComponent {
     )
   }
 
-  selectItem = (item, clickType, e) => {
-    //FIXME: 16th Oct SelectItem removed from
-    //by Robins. Deprecated. Causes rendering of all the child rows..
-    // if (
-    //   this.state.selectedItem === item ||
-    //   (this.props.itemTouchSendsClick && clickType === 'touch')
-    // ) {
-    //   if (item && this.props.onItemClick) {
-    //     const time = this.timeFromItemEvent(e)
-    //     this.props.onItemClick(item, e, time)
-    //   }
-    // } else {
-    //   this.setState({ selectedItem: item })
-    //   if (item && this.props.onItemSelect) {
-    //     const time = this.timeFromItemEvent(e)
-    //     this.props.onItemSelect(item, e, time)
-    //   } else if (item === null && this.props.onItemDeselect) {
-    //     this.props.onItemDeselect(e) // this isnt in the docs. Is this function even used?
-    //   }
-    // }
-  }
+
+  //FIXME: 16th Oct 2018. Deprecated by  Robins Gupta.
+  //Remove Later
+  // selectItem = (item, clickType, e) => {
+  //   if (
+  //     this.state.selectedItem === item ||
+  //     (this.props.itemTouchSendsClick && clickType === 'touch')
+  //   ) {
+  //     if (item && this.props.onItemClick) {
+  //       const time = this.timeFromItemEvent(e)
+  //       this.props.onItemClick(item, e, time)
+  //     }
+  //   } else {
+  //     this.setState({ selectedItem: item })
+  //     if (item && this.props.onItemSelect) {
+  //       const time = this.timeFromItemEvent(e)
+  //       this.props.onItemSelect(item, e, time)
+  //     } else if (item === null && this.props.onItemDeselect) {
+  //       this.props.onItemDeselect(e) // this isnt in the docs. Is this function even used?
+  //     }
+  //   }
+  // }
 
   doubleClickItem = (item, e) => {
     if (this.props.onItemDoubleClick) {
@@ -653,7 +654,6 @@ export default class ReactCalendarTimeline extends PureComponent {
   dragItem = (item, dragTime, newGroupOrder) => {
     let newGroup = this.props.groups[newGroupOrder]
     const keys = this.props.keys
-    console.log("I am dragging", item, dragTime, newGroupOrder)
     this.setState({
       draggingItem: item,
       dragTime: dragTime,
@@ -670,11 +670,13 @@ export default class ReactCalendarTimeline extends PureComponent {
   }
 
   resizingItem = (item, resizeTime, edge) => {
-    this.setState({
-      resizingItem: item,
-      resizingEdge: edge,
-      resizeTime: resizeTime
-    })
+    if(!this.state.resizedItem){
+      this.setState({
+        resizingItem: item,
+        resizingEdge: edge,
+        resizeTime: resizeTime
+      })
+    }
   }
 
   resizedItem = (item, resizeTime, edge, timeDelta) => {
@@ -863,17 +865,20 @@ export default class ReactCalendarTimeline extends PureComponent {
   }
 
   infoLabel() {
-    let label = null
 
-    if (this.state.dragTime) {
-      label = `${moment(this.state.dragTime).format('LLL')}, ${
-        this.state.dragGroupTitle
-      }`
-    } else if (this.state.resizeTime) {
-      label = moment(this.state.resizeTime).format('LLL')
-    }
+    //FIXME: 16th Oct 2018. Deprecated by  Robins Gupta.
+    //Remove Later
+    // let label = null
 
-    return label ? <InfoLabel label={label} /> : ''
+    // if (this.state.dragTime) {
+    //   label = `${moment(this.state.dragTime).format('LLL')}, ${
+    //     this.state.dragGroupTitle
+    //   }`
+    // } else if (this.state.resizeTime) {
+    //   label = moment(this.state.resizeTime).format('LLL')
+    // }
+
+    // return label ? <InfoLabel label={label} /> : ''
   }
 
   header(

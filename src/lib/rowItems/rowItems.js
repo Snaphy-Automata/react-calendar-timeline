@@ -111,7 +111,7 @@ export default class RowItems extends PureComponent {
 
     const item = items[index]
     const ItemComponent = this.ItemComponent;
-    console.log("Renderer getting called")
+    console.log("Row Renderer getting called")
 
     return (
       <ItemComponent

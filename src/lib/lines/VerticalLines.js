@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
 import { iterateTimes } from '../utility/calendar'
 
-export default class VerticalLines extends Component {
+export default class VerticalLines extends PureComponent {
   static propTypes = {
     canvasTimeStart: PropTypes.number.isRequired,
     canvasTimeEnd: PropTypes.number.isRequired,
@@ -13,17 +13,8 @@ export default class VerticalLines extends Component {
     timeSteps: PropTypes.object.isRequired,
     height: PropTypes.number.isRequired
   }
-
-  shouldComponentUpdate(nextProps) {
-    return !(
-      nextProps.canvasTimeStart === this.props.canvasTimeStart &&
-      nextProps.canvasTimeEnd === this.props.canvasTimeEnd &&
-      nextProps.canvasWidth === this.props.canvasWidth &&
-      nextProps.lineCount === this.props.lineCount &&
-      nextProps.minUnit === this.props.minUnit &&
-      nextProps.timeSteps === this.props.timeSteps &&
-      nextProps.height === this.props.height
-    )
+  constructor(props){
+    super(props)
   }
 
   render() {
