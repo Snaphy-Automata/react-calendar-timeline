@@ -295,8 +295,8 @@ export default class ReactCalendarTimeline extends PureComponent {
       visibleTimeStart: visibleTimeStart,
       visibleTimeEnd: visibleTimeEnd,
       canvasTimeStart: visibleTimeStart - (visibleTimeEnd - visibleTimeStart),
-
-      selectedItem: null,
+      //FIXME: 16th Oct 2018. Deprecated Robins
+      //selectedItem: null,
       dragTime: null,
       dragGroupTitle: null,
       resizeTime: null,
@@ -545,23 +545,25 @@ export default class ReactCalendarTimeline extends PureComponent {
   }
 
   selectItem = (item, clickType, e) => {
-    if (
-      this.state.selectedItem === item ||
-      (this.props.itemTouchSendsClick && clickType === 'touch')
-    ) {
-      if (item && this.props.onItemClick) {
-        const time = this.timeFromItemEvent(e)
-        this.props.onItemClick(item, e, time)
-      }
-    } else {
-      this.setState({ selectedItem: item })
-      if (item && this.props.onItemSelect) {
-        const time = this.timeFromItemEvent(e)
-        this.props.onItemSelect(item, e, time)
-      } else if (item === null && this.props.onItemDeselect) {
-        this.props.onItemDeselect(e) // this isnt in the docs. Is this function even used?
-      }
-    }
+    //FIXME: 16th Oct SelectItem removed from
+    //by Robins. Deprecated. Causes rendering of all the child rows..
+    // if (
+    //   this.state.selectedItem === item ||
+    //   (this.props.itemTouchSendsClick && clickType === 'touch')
+    // ) {
+    //   if (item && this.props.onItemClick) {
+    //     const time = this.timeFromItemEvent(e)
+    //     this.props.onItemClick(item, e, time)
+    //   }
+    // } else {
+    //   this.setState({ selectedItem: item })
+    //   if (item && this.props.onItemSelect) {
+    //     const time = this.timeFromItemEvent(e)
+    //     this.props.onItemSelect(item, e, time)
+    //   } else if (item === null && this.props.onItemDeselect) {
+    //     this.props.onItemDeselect(e) // this isnt in the docs. Is this function even used?
+    //   }
+    // }
   }
 
   doubleClickItem = (item, e) => {
@@ -705,9 +707,13 @@ export default class ReactCalendarTimeline extends PureComponent {
 
   handleRowClick = (e, rowIndex) => {
     // shouldnt this be handled by the user, as far as when to deselect an item?
-    if (this.state.selectedItem) {
-      this.selectItem(null)
-    }
+
+
+    //FIXME: 16th Oct 2018. Deprecated by  Robins Gupta.
+    //Remove Later
+    // if (this.state.selectedItem) {
+    //   this.selectItem(null)
+    // }
 
     if (this.props.onCanvasClick == null) return
 
@@ -778,7 +784,7 @@ export default class ReactCalendarTimeline extends PureComponent {
         items={this.props.items}
         groups={this.props.groups}
         keys={this.props.keys}
-        selectedItem={this.state.selectedItem}
+        //selectedItem={this.state.selectedItem}
         dragSnap={this.props.dragSnap}
         minResizeWidth={this.props.minResizeWidth}
         canChangeGroup={this.props.canChangeGroup}
@@ -830,7 +836,7 @@ export default class ReactCalendarTimeline extends PureComponent {
         items={this.props.items}
         groups={this.props.groups}
         keys={this.props.keys}
-        selectedItem={this.state.selectedItem}
+        //selectedItem={this.state.selectedItem}
         dragSnap={this.props.dragSnap}
         minResizeWidth={this.props.minResizeWidth}
         canChangeGroup={this.props.canChangeGroup}
@@ -1055,10 +1061,11 @@ export default class ReactCalendarTimeline extends PureComponent {
       // TODO: combine these two
       groupHeights: groupHeights,
       groupTops: groupTops,
-      selected:
-        this.state.selectedItem && !this.props.selected
-          ? [this.state.selectedItem]
-          : this.props.selected || [],
+      //FIXME: deprecated 16th Oct 2018. Robins => Removed deprecated..
+      // selected:
+      //   this.state.selectedItem && !this.props.selected
+      //     ? [this.state.selectedItem]
+      //     : this.props.selected || [],
       height: height,
       headerHeight: headerHeight,
       minUnit: minUnit,

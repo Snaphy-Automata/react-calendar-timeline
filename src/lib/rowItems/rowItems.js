@@ -33,7 +33,7 @@ export default class RowItems extends PureComponent {
     minimumWidthForItemContentVisibility: PropTypes.number.isRequired,
     dragSnap: PropTypes.number,
     minResizeWidth: PropTypes.number,
-    selectedItem: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    //selectedItem: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     canChangeGroup: PropTypes.bool.isRequired,
     canMove: PropTypes.bool.isRequired,
     canResize: PropTypes.oneOf([true, false, 'left', 'right', 'both']),
