@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import moment from 'moment'
 
 import Items from './items/Items'
@@ -29,7 +29,7 @@ import { TimelineMarkersProvider } from './markers/TimelineMarkersContext'
 import {stackItem} from './util'
 
 
-export default class ReactCalendarTimeline extends Component {
+export default class ReactCalendarTimeline extends PureComponent {
   static propTypes = {
     //Update 6th Sept 2018
     //By Robins Gupta
@@ -651,7 +651,7 @@ export default class ReactCalendarTimeline extends Component {
   dragItem = (item, dragTime, newGroupOrder) => {
     let newGroup = this.props.groups[newGroupOrder]
     const keys = this.props.keys
-
+    console.log("I am dragging", item, dragTime, newGroupOrder)
     this.setState({
       draggingItem: item,
       dragTime: dragTime,

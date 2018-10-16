@@ -1,14 +1,14 @@
 //Created by Robins
 //7th Sept 2018
 import PropTypes                    from 'prop-types'
-import React, { Component }         from 'react'
+import React, { PureComponent }         from 'react'
 import List                         from 'react-virtualized/dist/commonjs/List';
 
 import { _get }                     from '../utility/generic'
 import RowItem                      from './RowItem'
 
 
-export default class RowItems extends Component {
+export default class RowItems extends PureComponent {
   static propTypes = {
     //Ref 7th Sept 2018
     lineHeight: PropTypes.number.isRequired,

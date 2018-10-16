@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import interact from 'interactjs'
 import moment from 'moment'
 
 import { _get, deepObjectCompare } from '../utility/generic'
 
-export default class Item extends Component {
+export default class Item extends PureComponent {
   // removed prop type check for SPEED!
   // they are coming from a trusted component anyway
   // (this complicates performance debugging otherwise)
@@ -77,34 +77,34 @@ export default class Item extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    var shouldUpdate =
-      nextState.dragging !== this.state.dragging ||
-      nextState.dragTime !== this.state.dragTime ||
-      nextState.dragGroupDelta !== this.state.dragGroupDelta ||
-      nextState.resizing !== this.state.resizing ||
-      nextState.resizeTime !== this.state.resizeTime ||
-      nextProps.keys !== this.props.keys ||
-      !deepObjectCompare(nextProps.itemProps, this.props.itemProps) ||
-      nextProps.selected !== this.props.selected ||
-      nextProps.item !== this.props.item ||
-      nextProps.canvasTimeStart !== this.props.canvasTimeStart ||
-      nextProps.canvasTimeEnd !== this.props.canvasTimeEnd ||
-      nextProps.canvasWidth !== this.props.canvasWidth ||
-      nextProps.order !== this.props.order ||
-      nextProps.dragSnap !== this.props.dragSnap ||
-      nextProps.minResizeWidth !== this.props.minResizeWidth ||
-      nextProps.canChangeGroup !== this.props.canChangeGroup ||
-      nextProps.canSelect !== this.props.canSelect ||
-      nextProps.topOffset !== this.props.topOffset ||
-      nextProps.canMove !== this.props.canMove ||
-      nextProps.canResizeLeft !== this.props.canResizeLeft ||
-      nextProps.canResizeRight !== this.props.canResizeRight ||
-      nextProps.dimensions !== this.props.dimensions ||
-      nextProps.minimumWidthForItemContentVisibility !==
-        this.props.minimumWidthForItemContentVisibility
-    return shouldUpdate
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   var shouldUpdate =
+  //     nextState.dragging !== this.state.dragging ||
+  //     nextState.dragTime !== this.state.dragTime ||
+  //     nextState.dragGroupDelta !== this.state.dragGroupDelta ||
+  //     nextState.resizing !== this.state.resizing ||
+  //     nextState.resizeTime !== this.state.resizeTime ||
+  //     nextProps.keys !== this.props.keys ||
+  //     !deepObjectCompare(nextProps.itemProps, this.props.itemProps) ||
+  //     nextProps.selected !== this.props.selected ||
+  //     nextProps.item !== this.props.item ||
+  //     nextProps.canvasTimeStart !== this.props.canvasTimeStart ||
+  //     nextProps.canvasTimeEnd !== this.props.canvasTimeEnd ||
+  //     nextProps.canvasWidth !== this.props.canvasWidth ||
+  //     nextProps.order !== this.props.order ||
+  //     nextProps.dragSnap !== this.props.dragSnap ||
+  //     nextProps.minResizeWidth !== this.props.minResizeWidth ||
+  //     nextProps.canChangeGroup !== this.props.canChangeGroup ||
+  //     nextProps.canSelect !== this.props.canSelect ||
+  //     nextProps.topOffset !== this.props.topOffset ||
+  //     nextProps.canMove !== this.props.canMove ||
+  //     nextProps.canResizeLeft !== this.props.canResizeLeft ||
+  //     nextProps.canResizeRight !== this.props.canResizeRight ||
+  //     nextProps.dimensions !== this.props.dimensions ||
+  //     nextProps.minimumWidthForItemContentVisibility !==
+  //       this.props.minimumWidthForItemContentVisibility
+  //   return shouldUpdate
+  // }
 
   cacheDataFromProps(props) {
     this.itemId = _get(props.item, props.keys.itemIdKey)
