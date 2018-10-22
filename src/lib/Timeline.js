@@ -62,6 +62,7 @@ export default class ReactCalendarTimeline extends Component {
     clickTolerance: PropTypes.number,
 
     canChangeGroup: PropTypes.bool,
+    onRowsRendered: PropTypes.func,
     canMove: PropTypes.bool,
     canResize: PropTypes.oneOf([true, false, 'left', 'right', 'both']),
     useResizeHandle: PropTypes.bool,
@@ -193,6 +194,7 @@ export default class ReactCalendarTimeline extends Component {
 
     onItemMove: null,
     onItemResize: null,
+    onRowsRendered: null,
     onItemClick: null,
     onItemSelect: null,
     onItemDeselect: null,
@@ -937,7 +939,7 @@ export default class ReactCalendarTimeline extends Component {
   }
 
   sidebar(screenHeight) {
-    const { sidebarWidth } = this.props
+    const { sidebarWidth, onRowsRendered } = this.props
     return (
       sidebarWidth != null &&
       sidebarWidth > 0 && (
@@ -945,6 +947,7 @@ export default class ReactCalendarTimeline extends Component {
           groups={this.props.groups}
           getItemHoc={this.props.getItemHoc}
           groupRenderer={this.props.groupRenderer}
+          onRowsRendered={onRowsRendered}
           keys={this.props.keys}
           width={this.props.sidebarWidth}
           lineHeight={this.props.lineHeight}
@@ -1169,8 +1172,8 @@ export default class ReactCalendarTimeline extends Component {
                       totalListHeight,
                       headerHeight
                     )}
-                    {/* {this.infoLabel()}}
-                    {this.childrenWithProps(
+                    {/* {this.infoLabel()} */}
+                    {/* {this.childrenWithProps(
                       canvasTimeStart,
                       canvasTimeEnd,
                       canvasWidth,

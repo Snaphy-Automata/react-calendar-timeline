@@ -22,6 +22,7 @@ export default class Sidebar extends Component {
     itemHeightRatio: PropTypes.number.isRequired,
     screenHeight: PropTypes.number.isRequired,
     getItemHoc: PropTypes.func.isRequired,
+    onRowsRendered: PropTypes.func.isRequired,
   }
 
 
@@ -62,7 +63,7 @@ export default class Sidebar extends Component {
 
 
   render() {
-    const { width, isRightSidebar, screenHeight, setListReference } = this.props
+    const { width, isRightSidebar, screenHeight, setListReference, onRowsRendered } = this.props
 
     const sidebarStyle = {
       width: `${width}px`,
@@ -91,6 +92,7 @@ export default class Sidebar extends Component {
             rowCount={this.props.groups.length}
             rowHeight={height}
             rowRenderer={this.getRowItem}
+            onRowsRendered={onRowsRendered}
             style={{
               height: "100%",
               overflow: "hidden",
