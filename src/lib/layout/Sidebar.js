@@ -76,7 +76,6 @@ export default class Sidebar extends Component {
 
     const { getItemHeight, lineHeight, itemHeightRatio } = this.props
     const height = getItemHeight(lineHeight, itemHeightRatio)
-
     return (
       <div
         className={'rct-sidebar' + (isRightSidebar ? ' rct-sidebar-right' : '')}
