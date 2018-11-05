@@ -1,7 +1,7 @@
 {
-  "name": "react-calendar-timeline",
+  "name": "snaphy-calendar-timeline",
   "version": "0.18.2",
-  "description": "react calendar timeline",
+  "description": "automata calendar timeline",
   "main": "lib/index.js",
   "scripts": {
     "build": "npm run build:lib",
@@ -22,28 +22,7 @@
     "type": "git",
     "url": "https://github.com/namespace-ee/react-calendar-timeline.git"
   },
-  "author": "Marius Andra <marius.andra@gmail.com>",
-  "contributors": [
-    {
-      "name": "Stanisław Chmiela",
-      "email": "sjchmiela@gmail.com"
-    },
-    {
-      "name": "Mike Joyce",
-      "url": "https://github.com/mcMickJuice"
-    },
-    {
-      "name": "Samuel Rossetti"
-    },
-    {
-      "name": "amakhrov",
-      "url": "https://github.com/amakhrov"
-    },
-    {
-      "name": "Ahmad Ilaiwi",
-      "url": "https://github.com/Ilaiwi"
-    }
-  ],
+  "author": "Robins Gupta ",
   "license": "MIT",
   "keywords": [
     "react",
