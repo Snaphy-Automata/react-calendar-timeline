@@ -1,6 +1,6 @@
 {
   "name": "snaphy-calendar-timeline",
-  "version": "0.18.2",
+  "version": "0.18.3",
   "description": "automata calendar timeline",
   "main": "lib/index.js",
   "scripts": {
