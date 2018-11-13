@@ -86,6 +86,7 @@ export default class Sidebar extends Component {
             ref={(instance) => {
               setListReference?setListReference(instance):null;
             }}
+            estimatedRowSize={25}
             width={width}
             height={screenHeight}
             rowCount={this.props.groups.length}

@@ -108,6 +108,7 @@ export default class RowItems extends Component {
         }}
         className="rct-items rct-horizontal-lines"
         width={this.props.canvasWidth}
+        estimatedRowSize={25}
         height={screenHeight}
         rowCount={this.props.items.length}
         rowHeight={height}
